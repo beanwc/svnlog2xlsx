@@ -1,0 +1,44 @@
+#svn可执行文件的目录
+svn_bin = './svn'
+
+#生成表格的各列信息
+[[col_info]]
+#标题
+title = "ID"
+#格子背景颜色(RGB), 默认白色
+bg_color = "00000000"
+#格子前景颜色(RGB), 默认黑色
+fg_color = "FFFFFFFF"
+[[col_info]]
+title = "版本号"
+bg_color = "00000000"
+fg_color = "FFFFFFFF"
+[[col_info]]
+title = "提交者"
+bg_color = "00000000"
+fg_color = "FFFFFFFF"
+[[col_info]]
+title = "日期"
+bg_color = "00000000"
+fg_color = "FFFFFFFF"
+[[col_info]]
+title = "日志"
+bg_color = "00000000"
+fg_color = "FFFFFFFF"
+[[col_info]]
+title = "测试状态"
+bg_color = "FFFF00"
+fg_color = "FFFFFFFF"
+[[col_info]]
+title = "备注"
+bg_color = "00000000"
+fg_color = "FFFFFFFF"
+
+
+#svn提交者对应真实姓名
+[[author_info]]
+author = "zhangcong"
+name = "张聪"
+[[author_info]]
+author = "luozhijia"
+name = "罗志家"
