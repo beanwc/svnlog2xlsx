@@ -1,13 +1,24 @@
 package logic
 
 import (
-	"github.com/tealeg/xlsx"
 	"time"
 	"errors"
 	"../config"
+	"github.com/tealeg/xlsx"
+	. "github.com/beanwc/cclog"
 )
 
+func replace_author(author string) (string) {
+	for _, value := range config.StdConfigManager.GetConfig().Author_info_list {
+		if value.Author == author {
+			return value.Name
+		}
+	}
+	return author
+}
+
 func generate_xlsx(data *Log_data, save_file string) (err error) {
+	Debug("generate_xlsx", "generate_xlsx start")
 	file := xlsx.NewFile()
 	sheet, add_sheet_error := file.AddSheet("Sheet1")
 	if nil != add_sheet_error {
@@ -19,8 +30,6 @@ func generate_xlsx(data *Log_data, save_file string) (err error) {
 		head_cell.SetString(value.Title)
 	}
 	var id int = 0
-	test_state_style := xlsx.NewStyle()
-	test_state_style.Fill = xlsx.Fill{PatternType:"none", FgColor:"FFFFFFFF", BgColor:"FFFF00"}
 	for _, value := range data.Log_entry_array  {
 		var index int = 0
 		id += 1
@@ -44,7 +53,7 @@ func generate_xlsx(data *Log_data, save_file string) (err error) {
 
 		index++
 		cell_auth := data_row.AddCell()
-		cell_auth.SetString(value.Author)
+		cell_auth.SetString(replace_author(value.Author))
 		style_auth := xlsx.NewStyle()
 		style_auth.Fill = xlsx.Fill{PatternType:"none",
 			FgColor:config.StdConfigManager.GetConfig().Col_info_list[index].Fg_color,
@@ -54,7 +63,7 @@ func generate_xlsx(data *Log_data, save_file string) (err error) {
 		index++
 		date, _ := time.ParseInLocation(time.RFC3339Nano, value.Date, time.Local)
 		cell_date := data_row.AddCell()
-		cell_date.SetString(date.Format("2006-01-02 15:04:05"))
+		cell_date.SetString(date.Add(8 * time.Hour).Format("2006-01-02 15:04:05"))
 		style_date := xlsx.NewStyle()
 		style_date.Fill = xlsx.Fill{PatternType:"none",
 			FgColor:config.StdConfigManager.GetConfig().Col_info_list[index].Fg_color,
@@ -92,5 +101,6 @@ func generate_xlsx(data *Log_data, save_file string) (err error) {
 	if nil != save_error {
 		return errors.New("generat_xlsx save error: " + save_error.Error())
 	}
+	Debug("generate_xlsx", "generate_xlsx finish")
 	return nil
 }

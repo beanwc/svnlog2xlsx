@@ -1,5 +1,7 @@
 #svn可执行文件的目录
-svn_bin = './svn'
+svn_bin = 'svn'
+#svn版本库目录
+svn_repository_path = 'E:\xqj-11-7'
 
 #生成表格的各列信息
 [[col_info]]
@@ -27,7 +29,7 @@ bg_color = "00000000"
 fg_color = "FFFFFFFF"
 [[col_info]]
 title = "测试状态"
-bg_color = "FFFF00"
+bg_color = "FFFF00FF"
 fg_color = "FFFFFFFF"
 [[col_info]]
 title = "备注"

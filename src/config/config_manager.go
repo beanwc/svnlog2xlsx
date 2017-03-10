@@ -18,6 +18,7 @@ type Author_info struct {
 
 type ConfigData struct {
 	Svn_bin             string          `toml:"svn_bin"`
+	Svn_repository_path string          `toml:"svn_repository_path"`
 	Col_info_list       []Col_info      `toml:"col_info"`
 	Author_info_list    []Author_info   `toml:"author_info"`
 }

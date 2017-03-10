@@ -3,6 +3,7 @@ package logic
 import (
 	"encoding/xml"
 	"errors"
+	. "github.com/beanwc/cclog"
 )
 
 type Log_entry struct {
@@ -17,11 +18,13 @@ type Log_data struct {
 }
 
 func parse_xml(dataBytes []byte) (svn_log *Log_data, err error){
+	Debug("parse_xml", "parse_xml start")
 	svn_log = new(Log_data)
 	unmarshal_err := xml.Unmarshal(dataBytes, svn_log)
 	if nil != unmarshal_err {
 		err = errors.New("parse_xml unmarshal error: " + unmarshal_err.Error())
 		return
 	}
+	Debug("parse_xml", "parse_xml finish")
 	return
 }
